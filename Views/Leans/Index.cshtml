@@ -1,0 +1,41 @@
+@model List<Lean>
+
+@{
+    ViewData["Title"] = "Préstamos";
+}
+
+<h2>Lista de Préstamos Activos</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Nuevo Préstamo</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Usuario</th>
+        <th>Libro</th>
+        <th>Fecha Préstamo</th>
+        <th>Fecha Devolución</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var lean in Model)
+    {
+        <tr>
+            <td>@lean.Id</td>
+            <td>@lean.User?.Name</td>
+            <td>@lean.Book?.Title</td>
+            <td>@lean.LeanDate.ToShortDateString()</td>
+            <td>@lean.ReturnDate.ToShortDateString()</td>
+            <td>
+                <a asp-action="ReturnBook" asp-controller="Leans" asp-route-id="@lean.Id" 
+                   class="btn btn-warning btn-sm" 
+                   onclick="return confirm('¿Está seguro de devolver este libro?')">Devolver</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

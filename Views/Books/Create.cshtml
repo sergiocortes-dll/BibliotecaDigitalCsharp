@@ -1,0 +1,32 @@
+@model BibliotecaDigital.Models.Book
+@{
+    ViewData["Title"] = "Crear libro";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+<form method="post" asp-action="Create" asp-controller="Books">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group mb-3">
+        <label for="title">Titulo</label>
+        <input name="Title" class="form-control" id="title" placeholder="Titulo" type="text" required>
+    </div>
+    <div class="form-group mb-3">
+        <label for="author">Autor</label>
+        <input name="Author" class="form-control" id="author" placeholder="Autor" type="text" required>
+    </div>
+    <div class="form-group mb-3">
+        <label for="code">Código</label>
+        <input name="Code" class="form-control" id="code" placeholder="Código" type="text" required>
+    </div>
+    <div class="form-group mb-3">
+        <label for="available">Disponibles</label>
+        <input name="Available" class="form-control" id="available" placeholder="Disponibles" type="number" required>
+    </div>
+    <button class="btn btn-primary">Crear</button>
+</form>

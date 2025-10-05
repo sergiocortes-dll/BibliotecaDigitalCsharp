@@ -1,0 +1,40 @@
+@model List<Book>
+
+@{
+    ViewData["Title"] = "Libros";
+}
+
+<h2>Lista de Libros</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Registrar Nuevo Libro</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Título</th>
+        <th>Autor</th>
+        <th>Código</th>
+        <th>Ejemplares Disponibles</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var book in Model)
+    {
+        <tr>
+            <td>@book.Id</td>
+            <td>@book.Title</td>
+            <td>@book.Author</td>
+            <td>@book.Code</td>
+            <td>@book.Available</td>
+            <td>
+                <a asp-controller="Leans" asp-action="BookHistory" asp-route-bookId="@book.Id" 
+                   class="btn btn-info btn-sm">Ver Préstamos</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,31 @@
+@{
+    ViewData["Title"] = "Crear usuario";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+<form asp-action="Create" asp-controller="Users">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group mb-3">
+        <label for="name">Nombre</label>
+        <input name="Name" class="form-control" id="name" placeholder="Nombre" type="text" required>
+    </div>
+    <div class="form-group mb-3">
+        <label for="dni">Documento</label>
+        <input name="DNI" class="form-control" id="dni" placeholder="Documento" type="text" required>
+    </div>
+    <div class="form-group mb-3">
+        <label for="email">Correo</label>
+        <input name="Email" class="form-control" id="email" placeholder="Correo" type="email" required>
+    </div>
+    <div class="form-group mb-3">
+        <label for="phone">Teléfono</label>
+        <input name="Phone" class="form-control" id="phone" placeholder="Teléfono" type="text" required>
+    </div>
+    <button class="btn btn-primary">Crear</button>
+</form>
