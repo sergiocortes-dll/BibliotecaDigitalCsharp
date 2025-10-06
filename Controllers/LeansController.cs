@@ -78,11 +78,20 @@ public class LeansController : Controller
     
     public IActionResult UserHistory(int userId)
     {
+        var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+
+        if (user == null)
+        {
+            return NotFound();
+        }
+        
         var leans = _context.Leans
             .Include(p => p.Book)
             .Include(p => p.User)
             .Where(p => p.UserId == userId)
             .ToList();
+
+        ViewBag.UserName = user.Name;
 
         return View("History", leans);
     }

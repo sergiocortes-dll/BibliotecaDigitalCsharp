@@ -52,4 +52,10 @@ public class BooksController : Controller
             return View(book);
         }
     }
+
+    public IActionResult Edit(int id)
+    {
+        var book = _context.Books.Find(id);
+        return View(book);
+    }
 }

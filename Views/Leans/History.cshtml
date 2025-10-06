@@ -6,28 +6,39 @@ ViewData["Title"] = "Historial de Préstamos";
 
 <h2>Historial de Préstamos</h2>
 
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Usuario</th>
-        <th>Libro</th>
-        <th>Fecha Préstamo</th>
-        <th>Fecha Devolución</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var lean in Model)
-    {
-    <tr>
-        <td>@lean.Id</td>
-        <td>@lean.User?.Name</td>
-        <td>@lean.Book?.Title</td>
-        <td>@lean.LeanDate.ToShortDateString()</td>
-        <td>@lean.ReturnDate.ToShortDateString()</td>
-    </tr>
-    }
-    </tbody>
-</table>
+@if (Model.Count > 0)
+{
+    <table class="table table-striped">
+        <thead>
+        <tr class="table-dark">
+            <th>ID</th>
+            <th>Usuario</th>
+            <th>Libro</th>
+            <th>Fecha Préstamo</th>
+            <th>Fecha Devolución</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var lean in Model)
+        {
+            <tr>
+                <td>@lean.Id</td>
+                <td>@lean.User?.Name</td>
+                <td>@lean.Book?.Title</td>
+                <td>@lean.LeanDate.ToShortDateString()</td>
+                <td>@lean.ReturnDate.ToShortDateString()</td>
+            </tr>
+        }
+        </tbody>
+    </table> 
+}
+else
+{
+    <div class="alert alert-primary d-flex align-items-center gap-3" role="alert">
+        <i data-lucide="info"></i>
+        <div>@ViewBag.UserName no tiene préstamos activos.</div>
+    </div>
+}
+
 
 <a asp-action="Index" class="btn btn-secondary">Volver a Préstamos</a>

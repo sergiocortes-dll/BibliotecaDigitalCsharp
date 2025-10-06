@@ -1,31 +1,49 @@
+@model BibliotecaDigital.Models.User
+
 @{
     ViewData["Title"] = "Crear usuario";
 }
 
 <h1>@ViewData["Title"]</h1>
 
-@if (TempData["SuccessMessage"] != null)
+@if (ViewBag.SuccessMessage != null)
 {
-    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    <div class="alert alert-success">@ViewBag.SuccessMessage</div>
+    
+    <script>
+        // Esperamos a que el DOM esté cargado por seguridad
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("form");
+
+            if (form) {
+                form.style.display = "none";
+            }
+
+            setTimeout(() => {
+                window.location.href = "/Users"; // Redirección
+            }, 1000);
+        });
+    </script>
 }
 
-<form asp-action="Create" asp-controller="Users">
+
+<form asp-action="Create" id="form" method="post" asp-controller="Users">
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group mb-3">
         <label for="name">Nombre</label>
-        <input name="Name" class="form-control" id="name" placeholder="Nombre" type="text" required>
+        <input asp-for="Name" class="form-control" id="name" placeholder="Nombre" type="text" required>
     </div>
     <div class="form-group mb-3">
         <label for="dni">Documento</label>
-        <input name="DNI" class="form-control" id="dni" placeholder="Documento" type="text" required>
+        <input asp-for="DNI" class="form-control" id="dni" placeholder="Documento" type="text" required>
     </div>
     <div class="form-group mb-3">
         <label for="email">Correo</label>
-        <input name="Email" class="form-control" id="email" placeholder="Correo" type="email" required>
+        <input asp-for="Email" class="form-control" id="email" placeholder="Correo" type="email" required>
     </div>
     <div class="form-group mb-3">
         <label for="phone">Teléfono</label>
-        <input name="Phone" class="form-control" id="phone" placeholder="Teléfono" type="text" required>
+        <input asp-for="Phone" class="form-control" id="phone" placeholder="Teléfono" type="text" required>
     </div>
     <button class="btn btn-primary">Crear</button>
 </form>

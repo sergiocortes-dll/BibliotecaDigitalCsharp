@@ -26,8 +26,7 @@ public class UsersController : Controller
     }
 
     [HttpPost]
-    [ValidateAntiForgeryToken]
-    public IActionResult Create(User user)
+    public async Task<IActionResult> Create(User user)
     {
         try
         {
@@ -43,15 +42,45 @@ public class UsersController : Controller
             }
 
             _context.Users.Add(user);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
-            TempData["SuccessMessage"] = "Usuario registrado correctamente.";
-            return RedirectToAction(nameof(Index));
+            ViewBag.SuccessMessage = "Usuario registrado correctamente.";
+
+            return View();
         }
         catch (Exception ex)
         {
             ModelState.AddModelError("", "Error al registrar usuario: " + ex.Message);
             return View(user);
         }
+    }
+
+
+    public IActionResult Edit(int userId)
+    {
+        var user = _context.Users.Find(userId);
+        return View(user);
+    }
+
+    [HttpPost]
+    public IActionResult Edit(User user)
+    {
+        _context.Users.Update(user);
+        _context.SaveChanges();
+        return RedirectToAction(nameof(Index));
+    }
+
+    public IActionResult Delete(int userId)
+    {
+        var user = _context.Users.Find(userId);
+        return View(user);
+    }
+
+    [HttpPost]
+    public IActionResult Delete(User user)
+    {
+        _context.Users.Remove(user);
+        _context.SaveChanges();
+        return RedirectToAction(nameof(Index));
     }
 }

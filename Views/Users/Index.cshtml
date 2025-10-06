@@ -9,9 +9,9 @@
     <a class="btn btn-success" asp-controller="Users" asp-action="Create">Registrar Nuevo Usuario</a>
 </p>
 
-<table class="table">
+<table class="table table-striped">
     <thead>
-    <tr>
+    <tr class="table-dark">
         <th>Id</th>
         <th>Nombre</th>
         <th>Documento</th>
@@ -24,13 +24,15 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>@item.Id</td>
+            <td class="table-light">@item.Id</td>
             <td>@item.Name</td>
             <td>@item.DNI</td>
             <td>@item.Email</td>
             <td>@item.Phone</td>
             <td>
-                <a class="btn btn-primary btn-sm" asp-action="UserHistory" asp-controller="Leans" asp-route-userId="@item.Id">Ver Préstamos</a>
+                <a class="btn btn-sm" asp-action="UserHistory" asp-controller="Leans" asp-route-userId="@item.Id" data-toggle="tooltip" title="Ver Préstamos"><i data-lucide="archive"></i></a>
+                <a class="btn btn-sm" asp-action="Edit" asp-controller="Users" asp-route-userId="@item.Id" data-toggle="tooltip" title="Editar"><i data-lucide="pencil"></i></a>
+                <a class="btn btn-sm" asp-action="Delete" asp-controller="Users" asp-route-userId="@item.Id" data-toggle="tooltip" title="Eliminar"><i data-lucide="trash-2"></i></a>
             </td>
         </tr>
     }
