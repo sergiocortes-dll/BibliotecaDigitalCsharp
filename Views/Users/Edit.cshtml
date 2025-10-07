@@ -1,37 +1,40 @@
 @model BibliotecaDigital.Models.User
 
-<h2>Editar Usuario</h2>
+<div class="w-50 m-auto">
+    <h2>Editar Usuario</h2>
+    @using (Html.BeginForm("Edit", "Users", FormMethod.Post))
+    {
+        <div class="d-flex flex-column gap-3">
+            @Html.HiddenFor(model => model.Id)
 
-@using (Html.BeginForm("Edit", "Users", FormMethod.Post))
-{
-    @Html.HiddenFor(model => model.Id)
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name)
+                @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Name)
-        @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(m => m.Name)
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.DNI)
-        @Html.EditorFor(m => m.DNI, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(m => m.DNI)
-    </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.DNI)
+                @Html.EditorFor(m => m.DNI, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.DNI)
+            </div>
     
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email)
-        @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(m => m.Email)
-    </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email)
+                @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
     
-    <div class="form-group">
-        @Html.LabelFor(m => m.Phone)
-        @Html.EditorFor(m => m.Phone, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(m => m.Phone)
-    </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Phone)
+                @Html.EditorFor(m => m.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.Phone)
+            </div>
     
-    <p class="mt-4 d-flex justify-content-end gap-3">
-        <a class="btn btn-secondary" asp-action="Index" asp-controller="Users">Cancelar</a>
-        <input class="btn btn-dark w-50" type="submit" value="Guardar"/>
-    </p>
-}
+            <p class="d-flex justify-content-end gap-3">
+                <a class="btn btn-outline-secondary" asp-action="Index" asp-controller="Users">Cancelar</a>
+                <input class="btn btn-dark w-50" type="submit" value="Guardar"/>
+            </p>
+        </div>
+    }
+</div>
